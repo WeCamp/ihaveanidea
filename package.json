@@ -1,0 +1,10 @@
+{
+  "name": "ihaveanidea",
+  "version": "1.0.0",
+  "description": "I Have An Idea",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "WeCamp",
+  "license": "MIT"
+}
