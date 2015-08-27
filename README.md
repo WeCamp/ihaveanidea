@@ -1,4 +1,27 @@
-I have an idea!
+I Have an Idea
 =======
 
-WeCamp project
+## Discovery of "Idea's worth spreading"
+
+#### You will need:
+
+- git
+- composer
+- a mysql database
+
+#### Run the following commands:
+
+```
+git clone [project]
+composer install
+php app/console doctrine:schema:update --force
+php app/console fos:user:create
+```
+
+#### To view the site, do:
+
+```
+php app/console server:run
+```
+
+And access http://127.0.0.1:8000 in a browser
