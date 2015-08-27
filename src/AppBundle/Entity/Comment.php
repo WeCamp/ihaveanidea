@@ -54,7 +54,6 @@ class Comment
      */
     private $createdAt;
 
-
     /**
      * Get id
      *
@@ -97,8 +96,8 @@ class Comment
     }
 
     /**
-     * @param $private
-     * @return $this
+     * @param boolean $private
+     * @return Comment
      */
     public function setPrivate($private)
     {
@@ -140,11 +139,22 @@ class Comment
 
     /**
      * @param Idea $idea
-     * @return $this
+     * @return Comment
      */
     public function setIdea(Idea $idea)
     {
         $this->idea = $idea;
+
+        return $this;
+    }
+
+    /**
+     * @param User $user
+     * @return Comment
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
 
         return $this;
     }
@@ -155,16 +165,5 @@ class Comment
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * @param User $user
-     * @return $this
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
     }
 }

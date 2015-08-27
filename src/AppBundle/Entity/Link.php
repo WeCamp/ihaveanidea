@@ -28,12 +28,6 @@ class Link
     private $idea;
 
     /**
-     * @var User
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     */
-    private $user;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="link", type="text")
@@ -101,5 +95,24 @@ class Link
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @return Idea
+     */
+    public function getIdea()
+    {
+        return $this->idea;
+    }
+
+    /**
+     * @param Idea $idea
+     * @return Link
+     */
+    public function setIdea(Idea $idea)
+    {
+        $this->idea = $idea;
+
+        return $this;
     }
 }

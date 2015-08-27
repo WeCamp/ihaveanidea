@@ -22,6 +22,12 @@ class Idea
     private $id;
 
     /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     */
+    private $user;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -119,5 +125,24 @@ class Idea
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @param User $user
+     * @return Idea
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

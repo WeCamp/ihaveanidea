@@ -47,7 +47,6 @@ class Rank
      */
     private $createdAt;
 
-
     /**
      * Get id
      *
@@ -114,7 +113,7 @@ class Rank
 
     /**
      * @param Idea $idea
-     * @return $this
+     * @return Rank
      */
     public function setIdea(Idea $idea)
     {
@@ -133,7 +132,7 @@ class Rank
 
     /**
      * @param User $user
-     * @return $this
+     * @return Rank
      */
     public function setUser(User $user)
     {
