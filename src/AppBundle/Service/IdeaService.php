@@ -34,4 +34,9 @@ final class IdeaService
     {
         return $this->ideaRepository->findAll();
     }
+
+    public function getIdea($id)
+    {
+        return $this->ideaRepository->find($id);
+    }
 }

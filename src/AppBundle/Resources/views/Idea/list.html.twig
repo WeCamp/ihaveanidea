@@ -3,8 +3,10 @@
 {% block body %}
 This is a list of ideas
 
+<ul>
 {% for idea in ideas %}
-    - {{ idea.title }}
+    <li><a href="/idea/{{ idea.id }}">{{ idea.title }}</a></li>
 {% endfor %}
+</ul>
 
 {% endblock %}

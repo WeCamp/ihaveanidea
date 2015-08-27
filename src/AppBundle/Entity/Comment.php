@@ -23,7 +23,7 @@ class Comment
 
     /**
      * @var Idea
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Idea")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Idea", inversedBy="comments")
      */
     private $idea;
 
