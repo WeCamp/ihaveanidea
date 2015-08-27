@@ -45,7 +45,17 @@ final class IdeaService
     {
         return $this->ideaRepository->findAll();
     }
-
+    
+    /**
+     * @param Idea $idea
+     */
+    public function saveIdea(Idea $idea)
+    {
+        $idea->setCreatedAt(new \DateTime());
+        $this->entityManager->persist($idea);
+        $this->entityManager->flush($idea);
+    }
+    
     /**
      * @param $id
      *
@@ -133,3 +143,4 @@ final class IdeaService
         return $user;
     }
 }
+
