@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Link
 {
+    const TYPE_YOUTUBE = 'youtube';
+
     /**
      * @var integer
      *
