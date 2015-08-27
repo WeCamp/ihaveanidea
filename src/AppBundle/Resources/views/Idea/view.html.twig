@@ -9,12 +9,15 @@
 <strong>Description:</strong>
 <pre>{{ idea.description }}</pre>
 <hr />
+    {% if is_granted('ROLE_USER') %}
     <form method="post" action="{{ path('idea_comment', {'id': idea.id}) }}">
         <textarea name="comment"></textarea>
         <br />
         <input type="submit" value="Provide feedback" />
     </form>
-<hr />
+    <hr />
+    {% endif %}
+
 {% for comment in idea.comments %}
     <table>
         <tr>
