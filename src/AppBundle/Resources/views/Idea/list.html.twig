@@ -5,7 +5,7 @@ This is a list of ideas
 
 <ul>
 {% for idea in ideas %}
-    <li><a href="/idea/{{ idea.id }}">{{ idea.title }}</a></li>
+    <li><a href="{{ path('idea_view', {'id': idea.id}) }}">{{ idea.title }}</a></li>
 {% endfor %}
 </ul>
 

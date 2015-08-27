@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="/idea/list">Back to list</a>
+    <a href="{{ path('idea_list') }}">Back to list</a>
 <hr />
 
 <h1>Idea: {{ idea.title }}</h1>
