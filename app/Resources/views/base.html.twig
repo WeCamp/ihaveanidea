@@ -4,14 +4,50 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}I have an idea{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/custom.css">
     </head>
     <body role="document">
-        {% block body %}{% endblock %}
+        {% block body %}
+        <!-- Fixed navbar -->
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+              <div class="container">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">I have an idea</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                  <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#login">Login</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#ideas">Ideas</a></li>
+                  </ul>
+                </div><!--/.nav-collapse -->
+              </div>
+            </nav>
+
+            <div class="container theme-showcase" role="main" id="main-container">
+                {% block content %}
+
+                {% endblock %}
+
+            </div> <!-- /container -->
+            <footer class="footer">
+              <div class="container">
+                <p class="text-muted">Place sticky footer content here.</p>
+              </div>
+            </footer>
+        {% endblock %}
         {% block javascripts %}{% endblock %}
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
