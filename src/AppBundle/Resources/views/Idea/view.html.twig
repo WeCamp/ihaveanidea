@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('idea_list') }}">Back to list</a>
+<hr />
+
+<h1>Idea: {{ idea.title }}</h1>
+<h3>by {{ idea.user.username }} at {{ idea.createdAt|date('Y-m-d') }}</h3>
+<strong>Description:</strong>
+<pre>{{ idea.description }}</pre>
+<hr />
+{% for comment in idea.comments %}
+    <table>
+        <tr>
+            <th>{{ comment.user.username }}</th>
+            <th>{{ comment.createdAt|date('Y-m-d') }}</th>
+        </tr>
+        <tr><td colspan="2">{{ comment.content }}</td></tr>
+    </table>
+{% endfor %}
+{% endblock %}

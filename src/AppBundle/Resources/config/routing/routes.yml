@@ -1,3 +1,7 @@
 idea_list:
     path:      /idea/list
     defaults:  { _controller: AppBundle:Idea:list }
+
+idea_view:
+    path:      /idea/{id}
+    defaults:  { _controller: AppBundle:Idea:view }

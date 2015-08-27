@@ -9,7 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class IdeaController extends Controller
 {
     /**
-     * @Route("/idea/list", name="idea_list")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction()
@@ -19,9 +18,16 @@ class IdeaController extends Controller
         ));
     }
 
-    public function readIdeaAction()
+    /**
+     * @param int $id
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewAction($id)
     {
-
+        return $this->render('AppBundle:Idea:view.html.twig', array(
+            'idea' => $this->get('idea.service')->getIdea($id),
+        ));
     }
 
     public function createIdeaAction()
