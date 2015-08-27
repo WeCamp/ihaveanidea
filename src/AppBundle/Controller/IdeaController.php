@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Service\IdeaService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class IdeaController extends Controller
 {
@@ -35,9 +36,10 @@ class IdeaController extends Controller
 
     }
 
-    public function createCommentAction()
+    public function createCommentAction($id)
     {
-
+        $this->get('idea.service')->comment($id, $_POST['comment']);
+        return $this->redirectToRoute('idea_view', [ 'id' => $id ]);
     }
 
     public function rankIdeaAction()
