@@ -11,13 +11,17 @@ I Have an Idea
 
 #### Run the following commands:
 
-- git clone [project]
-- composer install
-- php app/console doctrine:schema:update --force
-- php app/console fos:user:create
+```
+git clone [project]
+composer install
+php app/console doctrine:schema:update --force
+php app/console fos:user:create
+```
 
 #### To view the site, do:
 
-- app/console server run
+```
+php app/console server:run
+```
 
 And access http://127.0.0.1:8000 in a browser
