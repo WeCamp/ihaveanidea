@@ -49,7 +49,7 @@ class IdeaController extends Controller
             $private = true;
         }
 
-        $this->get('idea.service')->comment($id, $_POST['comment'], $private);
+        $this->get('idea.service')->comment($id, $request->get('comment'), $private);
         return $this->redirectToRoute('idea_view', [ 'id' => $id ]);
     }
 
