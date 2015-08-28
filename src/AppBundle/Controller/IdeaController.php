@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Service\IdeaService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class IdeaController extends Controller
@@ -40,11 +41,11 @@ class IdeaController extends Controller
 
     }
 
-    public function createCommentAction($id)
+    public function createCommentAction($id, Request $request)
     {
         $private = false;
 
-        if(isset($_POST['private']) && $_POST['private'] === 'on') {
+        if($request->get('private') === 'on') {
             $private = true;
         }
 
