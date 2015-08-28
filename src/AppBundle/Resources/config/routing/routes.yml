@@ -9,3 +9,9 @@ idea_create:
 idea_view:
     path:      /idea/{id}
     defaults:  { _controller: AppBundle:Idea:view }
+
+idea_comment:
+    path:       /idea/{id}/comment
+    defaults:  { _controller: AppBundle:Idea:createComment }
+    requirements:
+        methods: "POST"

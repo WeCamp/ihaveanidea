@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Service\IdeaService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Idea;
 use AppBundle\Form\Type\Idea as IdeaForm;
@@ -29,12 +30,16 @@ class IdeaController extends Controller
      */
     public function viewAction($id)
     {
+        /** @var IdeaService $ideaService */
+        $ideaService = $this->get('idea.service');
+
         return $this->render(
             'AppBundle:Idea:view.html.twig',
             [
-                //'idea' => $this->get('idea.service')->getIdea($id),
+                //'idea' => $ideaService->getIdea($id),
                 // Static data to prettify the idea page
                 'idea' => [
+                    'id' => '123',
                     'title' => 'What about movie',
                     'createdAt' => time(),
                     'description' => 'On Christmas Eve, New York City Police Detective Lieutenant John McClane arrives
@@ -87,9 +92,16 @@ class IdeaController extends Controller
         ));
     }
 
-    public function createCommentAction()
+    public function createCommentAction($id, Request $request)
     {
+        $private = false;
 
+        if($request->get('private') === 'on') {
+            $private = true;
+        }
+
+        $this->get('idea.service')->comment($id, $request->get('comment'), $private);
+        return $this->redirectToRoute('idea_view', [ 'id' => $id ]);
     }
 
     public function rankIdeaAction()
