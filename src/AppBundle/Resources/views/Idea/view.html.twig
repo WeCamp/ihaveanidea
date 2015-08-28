@@ -1,21 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <a href="{{ path('idea_list') }}">Back to list</a>
+{% block content %}
+<ol class="breadcrumb idea-breadcrumbs">
+    <li>
+        <a href="{{ path('idea_list') }}">Back to all ideas</a>
+    </li>
+</ol>
 <hr />
 
-<h1>Idea: {{ idea.title }}</h1>
-<h3>by {{ idea.user.username }} at {{ idea.createdAt|date('Y-m-d') }}</h3>
-<strong>Description:</strong>
-<pre>{{ idea.description }}</pre>
+<h1 id="idea-title">{{ idea.title }}</h1>
+<h4 id="idea-author">by {{ idea.user.username }} at {{ idea.createdAt|date('Y-m-d') }}</h4>
+<p>{{ idea.description }}</p>
+<p class="text-center">
+    <img src="/images/die-hard.png" id="idea-video">
+</p>
+<p id="idea-rank">
+    <button type="button" class="btn btn-success">
+        <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+        Out of my head excited!
+    </button><br>
+    <button type="button" class="btn btn-info">
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+        Awesome
+    </button><br>
+    <button type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        Nice
+    </button><br>
+</p>
 <hr />
 {% for comment in idea.comments %}
-    <table>
-        <tr>
-            <th>{{ comment.user.username }}</th>
-            <th>{{ comment.createdAt|date('Y-m-d') }}</th>
-        </tr>
-        <tr><td colspan="2">{{ comment.content }}</td></tr>
-    </table>
+    <div>
+        <ins>{{ comment.user.username }}</ins> ({{ comment.createdAt|date('d/m/Y') }})
+        <p>
+            {{ comment.content }}
+        </p>
+    </div>
 {% endfor %}
 {% endblock %}

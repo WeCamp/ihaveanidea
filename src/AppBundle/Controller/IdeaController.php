@@ -29,9 +29,41 @@ class IdeaController extends Controller
      */
     public function viewAction($id)
     {
-        return $this->render('AppBundle:Idea:view.html.twig', array(
-            'idea' => $this->get('idea.service')->getIdea($id),
-        ));
+        return $this->render(
+            'AppBundle:Idea:view.html.twig',
+            [
+                //'idea' => $this->get('idea.service')->getIdea($id),
+                // Static data to prettify the idea page
+                'idea' => [
+                    'title' => 'What about movie',
+                    'createdAt' => time(),
+                    'description' => 'On Christmas Eve, New York City Police Detective Lieutenant John McClane arrives
+                    in Los Angeles to reconcile with his estranged wife, Holly. McClane is driven to the Nakatomi Plaza
+                    building for a company Christmas party by Argyle. While McClane changes clothes, the party is
+                    disrupted by the arrival of Hans Gruber and his heavily armed group: Karl, Franco, Tony, Theo,
+                    Alexander, Marco, Kristoff, Eddie, Uli, Heinrich, Fritz, and James.',
+                    'user' => [
+                        'username' => 'Bruce Willis'
+                    ],
+                    'comments' => [
+                        [
+                            'user' => [
+                                'username' => 'David Guetta',
+                            ],
+                            'content' => 'Great!',
+                            'createdAt' => time(),
+                        ],
+                        [
+                            'user' => [
+                                'username' => 'Armin van Buuren',
+                            ],
+                            'content' => 'Like it!',
+                            'createdAt' => time(),
+                        ]
+                    ]
+                ],
+            ]
+        );
     }
 
     /**
