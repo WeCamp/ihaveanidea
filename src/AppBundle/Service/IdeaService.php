@@ -7,6 +7,7 @@ use AppBundle\Entity\Idea;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Generator;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 final class IdeaService
@@ -56,13 +57,14 @@ final class IdeaService
     }
 
     /**
-     * @param int $ideaId
+     * @param int    $ideaId
      * @param string $content
+     * @param bool   $isPrivate
      *
      * @return Comment
      * @throws \Exception
      */
-    public function comment($ideaId, $content)
+    public function comment($ideaId, $content, $isPrivate)
     {
         $idea = $this->getIdea($ideaId);
 
@@ -70,8 +72,7 @@ final class IdeaService
             throw new \Exception("Unknown Idea[id={$ideaId}] aka 'I have no idea!'");
         }
 
-        $userPasswordToken = $this->tokenStorage->getToken();
-        $user = $userPasswordToken->getUser();
+        $user = $this->getAuthenticatedUser();
 
         $this->ensureAuthenticated($user);
 
@@ -79,7 +80,7 @@ final class IdeaService
         $comment->setIdea($idea);
         $comment->setContent($content);
         $comment->setUser($user);
-        $comment->setPrivate(false);
+        $comment->setPrivate($isPrivate);
         $comment->setCreatedAt(new \DateTime());
 
         $this->entityManager->persist($comment);
@@ -98,5 +99,37 @@ final class IdeaService
         if (($user instanceof User) === false) {
             throw new \Exception("User must be logged in");
         }
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Generator
+     */
+    public function getCommentsForIdea($id)
+    {
+        $idea = $this->getIdea($id);
+        $authenticatedUser = $this->getAuthenticatedUser();
+
+        foreach($idea->getComments() as $comment) {
+            if($comment->isPrivate()) {
+                if($idea->getUser() === $authenticatedUser || $comment->getUser() === $authenticatedUser) {
+                    yield $comment;
+                }
+            } else {
+                yield $comment;
+            }
+
+        }
+    }
+
+    /**
+     * @return User|null
+     */
+    private function getAuthenticatedUser()
+    {
+        $userPasswordToken = $this->tokenStorage->getToken();
+        $user              = $userPasswordToken->getUser();
+        return $user;
     }
 }

@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Service\IdeaService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class IdeaController extends Controller
@@ -26,8 +27,12 @@ class IdeaController extends Controller
      */
     public function viewAction($id)
     {
+        /** @var IdeaService $ideaService */
+        $ideaService = $this->get('idea.service');
+
         return $this->render('AppBundle:Idea:view.html.twig', array(
-            'idea' => $this->get('idea.service')->getIdea($id),
+            'idea' => $ideaService->getIdea($id),
+            'comments' => $ideaService->getCommentsForIdea($id)
         ));
     }
 
@@ -36,9 +41,15 @@ class IdeaController extends Controller
 
     }
 
-    public function createCommentAction($id)
+    public function createCommentAction($id, Request $request)
     {
-        $this->get('idea.service')->comment($id, $_POST['comment']);
+        $private = false;
+
+        if($request->get('private') === 'on') {
+            $private = true;
+        }
+
+        $this->get('idea.service')->comment($id, $request->get('comment'), $private);
         return $this->redirectToRoute('idea_view', [ 'id' => $id ]);
     }
 

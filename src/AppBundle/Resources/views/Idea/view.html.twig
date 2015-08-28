@@ -13,12 +13,14 @@
     <form method="post" action="{{ path('idea_comment', {'id': idea.id}) }}">
         <textarea name="comment"></textarea>
         <br />
+        <input type="checkbox" name="private" /> Private comment
+        <br />
         <input type="submit" value="Provide feedback" />
     </form>
     <hr />
     {% endif %}
 
-{% for comment in idea.comments %}
+{% for comment in comments %}
     <table>
         <tr>
             <th>{{ comment.user.username }}</th>
