@@ -12,3 +12,20 @@ services:
     arguments:
       - @doctrine.orm.entity_manager
       - @security.token_storage
+      
+  link.service:
+    class: AppBundle\Service\LinkService
+    arguments:
+      - @doctrine.orm.entity_manager
+
+  idea.create.form:
+    class: AppBundle\Form\Type\Idea
+
+  idea.create.form.handler:
+    class: AppBundle\Form\Handler\Idea
+    arguments:
+      - @form.factory
+      - @idea.create.form
+      - @idea.service
+      - @link.service
+      - @security.token_storage

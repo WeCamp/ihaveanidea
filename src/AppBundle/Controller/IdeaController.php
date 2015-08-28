@@ -5,8 +5,11 @@ namespace AppBundle\Controller;
 use AppBundle\Service\IdeaService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Idea;
+use AppBundle\Form\Type\Idea as IdeaForm;
+use AppBundle\Form\Handler\Idea as IdeaFormHandler;
 
 class IdeaController extends Controller
 {
@@ -36,9 +39,25 @@ class IdeaController extends Controller
         ));
     }
 
-    public function createIdeaAction()
+    /**
+     * @param Request $request
+     * @Route("/idea/create", name="idea_create")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function createIdeaAction(Request $request)
     {
+        /** @var IdeaFormHandler $ideaFormHandler */
+        $ideaFormHandler = $this->get('idea.create.form.handler');
 
+        $form = $ideaFormHandler->form();
+
+        if ($request->isMethod('POST')) {
+            $ideaFormHandler->process($request, $form);
+        }
+
+        return $this->render('AppBundle:Idea:create.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     public function createCommentAction($id, Request $request)
