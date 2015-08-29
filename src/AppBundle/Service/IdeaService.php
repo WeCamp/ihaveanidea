@@ -45,7 +45,7 @@ final class IdeaService
     {
         return $this->ideaRepository->findAll();
     }
-    
+
     /**
      * @param Idea $idea
      */
@@ -55,11 +55,10 @@ final class IdeaService
         $this->entityManager->persist($idea);
         $this->entityManager->flush($idea);
     }
-    
+
     /**
-     * @param $id
-     *
-     * @return null|Idea
+     * @param integer $id
+     * @return null|object
      */
     public function getIdea($id)
     {

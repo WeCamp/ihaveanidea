@@ -12,7 +12,7 @@ services:
     arguments:
       - @doctrine.orm.entity_manager
       - @security.token_storage
-      
+
   link.service:
     class: AppBundle\Service\LinkService
     arguments:

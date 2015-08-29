@@ -3,25 +3,25 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  background: url(../images/idea_image.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    background: url(../images/idea_image.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #f5f5f5;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
 }
 
 
@@ -30,12 +30,52 @@ body {
 /* Not required for template or sticky footer method. */
 
 .container {
-  padding: 0 15px;
+    padding: 0 15px;
 }
+
 .container .text-muted {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
 #main-container {
     margin-top: 80px;
+    background-color: #555555;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    padding: 20px;
+    color: #ADADAD;
+}
+
+#idea-title {
+    margin: 0;
+}
+
+#idea-author {
+    margin-top: 0;
+}
+
+#idea-video {
+    width: 800px;
+    margin: 0 auto;
+}
+
+#idea-rank button {
+    margin-bottom: 5px;
+    width: 200px;
+}
+
+.idea-breadcrumbs {
+    background: none;
+}
+
+.idea-breadcrumbs a {
+    color: #999;
+}
+
+#footer {
+    height: 35px;
+    text-align: center;
+    padding: 5px;
 }
