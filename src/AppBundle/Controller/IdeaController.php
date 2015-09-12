@@ -35,6 +35,8 @@ class IdeaController extends Controller
 
         $idea = $ideaService->getIdea($id);
 
+        $user = $idea->getUser();
+
         return $this->render(
             'AppBundle:Idea:view.html.twig',
             [
@@ -43,9 +45,7 @@ class IdeaController extends Controller
                     'title' => $idea->getTitle(),
                     'createdAt' => $idea->getCreatedAt(),
                     'description' => $idea->getDescription(),
-                    'user' => [
-                        'username' => $idea->getUser(),
-                    ]
+                    'username' => $user->getUserName(),
                 ],
             ]
         );
