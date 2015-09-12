@@ -29,5 +29,29 @@
 
 <hr />
 
+<h4>Comments</h4>
+
+{% if is_granted('ROLE_USER') %}
+    <form method="post" action="{{ path('idea_comment', {'id': idea.id}) }}">
+        <textarea class="form-control" name="comment"></textarea>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="private" value="">
+                Private comment
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Provide feedback</button>
+    </form>
+    <hr />
+{% endif %}
+
+{% for comment in idea.comments %}
+    <div>
+        <ins>{{ comment.user.username }}</ins> ({{ comment.createdAt|date('d/m/Y') }})
+        <p>
+            {{ comment.content }}
+        </p>
+    </div>
+{% endfor %}
 
 {% endblock %}

@@ -34,8 +34,9 @@ class IdeaController extends Controller
         $ideaService = $this->get('idea.service');
 
         $idea = $ideaService->getIdea($id);
-
+        $comments = $ideaService->getCommentsForIdea($id);
         $user = $idea->getUser();
+
 
         return $this->render(
             'AppBundle:Idea:view.html.twig',
@@ -46,6 +47,7 @@ class IdeaController extends Controller
                     'createdAt' => $idea->getCreatedAt(),
                     'description' => $idea->getDescription(),
                     'username' => $user->getUserName(),
+                    'comments' => $comments
                 ],
             ]
         );
