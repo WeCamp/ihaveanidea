@@ -11,9 +11,7 @@
 <h1 id="idea-title">{{ idea.title }}</h1>
 <h4 id="idea-author">by {{ idea.user.username }} at {{ idea.createdAt|date('Y-m-d') }}</h4>
 <p>{{ idea.description }}</p>
-<p class="text-center">
-    <img src="/images/die-hard.png" id="idea-video">
-</p>
+
 <p id="idea-rank">
     <button type="button" class="btn btn-success">
         <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
@@ -31,29 +29,5 @@
 
 <hr />
 
-<h4>Comments</h4>
-
-{% if is_granted('ROLE_USER') %}
-    <form method="post" action="{{ path('idea_comment', {'id': idea.id}) }}">
-        <textarea class="form-control" name="comment"></textarea>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" name="private" value="">
-                Private comment
-            </label>
-        </div>
-        <button type="submit" class="btn btn-primary">Provide feedback</button>
-    </form>
-    <hr />
-{% endif %}
-
-{% for comment in idea.comments %}
-    <div>
-        <ins>{{ comment.user.username }}</ins> ({{ comment.createdAt|date('d/m/Y') }})
-        <p>
-            {{ comment.content }}
-        </p>
-    </div>
-{% endfor %}
 
 {% endblock %}
