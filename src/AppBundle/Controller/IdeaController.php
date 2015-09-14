@@ -33,39 +33,21 @@ class IdeaController extends Controller
         /** @var IdeaService $ideaService */
         $ideaService = $this->get('idea.service');
 
+        $idea = $ideaService->getIdea($id);
+        $comments = $ideaService->getCommentsForIdea($id);
+        $user = $idea->getUser();
+
+
         return $this->render(
             'AppBundle:Idea:view.html.twig',
             [
-                //'idea' => $ideaService->getIdea($id),
-                // Static data to prettify the idea page
                 'idea' => [
-                    'id' => '123',
-                    'title' => 'What about movie',
-                    'createdAt' => time(),
-                    'description' => 'On Christmas Eve, New York City Police Detective Lieutenant John McClane arrives
-                    in Los Angeles to reconcile with his estranged wife, Holly. McClane is driven to the Nakatomi Plaza
-                    building for a company Christmas party by Argyle. While McClane changes clothes, the party is
-                    disrupted by the arrival of Hans Gruber and his heavily armed group: Karl, Franco, Tony, Theo,
-                    Alexander, Marco, Kristoff, Eddie, Uli, Heinrich, Fritz, and James.',
-                    'user' => [
-                        'username' => 'Bruce Willis'
-                    ],
-                    'comments' => [
-                        [
-                            'user' => [
-                                'username' => 'David Guetta',
-                            ],
-                            'content' => 'Great!',
-                            'createdAt' => time(),
-                        ],
-                        [
-                            'user' => [
-                                'username' => 'Armin van Buuren',
-                            ],
-                            'content' => 'Like it!',
-                            'createdAt' => time(),
-                        ]
-                    ]
+                    'id' => $idea->getId(),
+                    'title' => $idea->getTitle(),
+                    'createdAt' => $idea->getCreatedAt(),
+                    'description' => $idea->getDescription(),
+                    'username' => $user->getUserName(),
+                    'comments' => $comments
                 ],
             ]
         );

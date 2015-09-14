@@ -142,4 +142,3 @@ final class IdeaService
         return $user;
     }
 }
-
